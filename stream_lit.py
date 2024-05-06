@@ -1,13 +1,20 @@
-import pandas as pd 
-import numpy as np  
-import streamlit as st 
-
+import pandas as pd
+import streamlit as st
 
 st.set_page_config(page_title="File Uploader")
 
-df = st.file_uploader(label="Upload your dataset:")
+# Function to upload file to Streamlit Cloud
+@st.cache(allow_output_mutation=True)
+def upload_to_streamlit_cloud(file):
+    # Do something to upload the file to Streamlit Cloud
+    return file
 
-if df:
-    df = pd.read_csv(df)
+uploaded_file = st.file_uploader(label="Upload your dataset:")
+
+if uploaded_file:
+    st.write("File uploaded successfully!")
     
-    st.write(df.head())
+    if st.button("Submit"):
+        # Upload the file to Streamlit Cloud
+        uploaded_file = upload_to_streamlit_cloud(uploaded_file)
+        st.write("File uploaded to Streamlit Cloud!")
